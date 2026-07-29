@@ -425,6 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 658498844}
   - component: {fileID: 658498843}
+  - component: {fileID: 658498845}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -506,6 +507,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &658498845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658498840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2651adc8f8e2435479c46209a11ffc24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridUnit
+  currentCell: {x: 0, y: 0}
+  startCell: {x: 0, y: 0}
+  targetCell: {x: 0, y: 0}
+  isMoving: 0
+  switchedCell: 0
+  switchedFrame: -1
 --- !u!1 &738329631
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061027062}
   - component: {fileID: 1061027063}
+  - component: {fileID: 1061027064}
   m_Layer: 0
   m_Name: MoveManager
   m_TagString: Untagged
@@ -707,24 +727,44 @@ MonoBehaviour:
   cellSize: {x: 1, y: 1}
   player1:
     player: {fileID: 1345899228}
+    grid: {fileID: 1345899229}
     moveSpeed: 5
-    offset: {x: 0, y: 0}
+    offset: {x: 0.5, y: 0.5}
     up: 119
     down: 115
     left: 97
     right: 100
     isMoving: 0
+    startPos: {x: 0, y: 0, z: 0}
     targetPos: {x: 0, y: 0, z: 0}
   player2:
     player: {fileID: 658498844}
+    grid: {fileID: 658498845}
     moveSpeed: 5
-    offset: {x: 0, y: 0}
+    offset: {x: 0.5, y: 0.5}
     up: 273
     down: 274
     left: 276
     right: 275
     isMoving: 0
+    startPos: {x: 0, y: 0, z: 0}
     targetPos: {x: 0, y: 0, z: 0}
+--- !u!114 &1061027064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061027060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c2faff2302c494e9ee6a22b2667b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleManager
+  player1: {fileID: 1345899229}
+  player2: {fileID: 658498845}
+  player1HP: 100
+  player2HP: 100
 --- !u!1 &1345899224
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345899228}
   - component: {fileID: 1345899227}
+  - component: {fileID: 1345899229}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player1
@@ -816,6 +857,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1345899229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345899224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2651adc8f8e2435479c46209a11ffc24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridUnit
+  currentCell: {x: 0, y: 0}
+  startCell: {x: 0, y: 0}
+  targetCell: {x: 0, y: 0}
+  isMoving: 0
+  switchedCell: 0
+  switchedFrame: -1
 --- !u!1 &1465351628
 GameObject:
   m_ObjectHideFlags: 0

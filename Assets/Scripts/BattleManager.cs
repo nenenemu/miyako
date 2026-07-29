@@ -10,36 +10,109 @@ public class BattleManager : MonoBehaviour
     public int player1HP = 100;
     public int player2HP = 100;
 
+    bool battleProcessed = false;
+
     void Awake()
     {
         Instance = this;
     }
 
-    public void CheckAttack(GridUnit attacker)
+    public void ResolveBattle()
     {
-        GridUnit defender;
+        // 同じマスじゃなければ戦闘解除
+        if (player1.currentCell != player2.currentCell)
+        {
+            battleProcessed = false;
+            return;
+        }
 
-        if (attacker == player1)
-            defender = player2;
-        else
-            defender = player1;
-
-        // 同じマスじゃないなら何もしない
-        if (attacker.currentCell != defender.currentCell)
+        // すでに処理済みなら何もしない
+        if (battleProcessed)
             return;
 
-        // 攻撃
-        if (attacker == player1)
+        bool p1Moved = player1.switchedFrame == Time.frameCount;
+        bool p2Moved = player2.switchedFrame == Time.frameCount;
+
+        Vector2Int p1Dir = player1.targetCell - player1.startCell;
+        Vector2Int p2Dir = player2.targetCell - player2.startCell;
+
+        // ============================
+        // ① 完全同時 → 相打ち
+        // ============================
+        if (player1.isMoving &&
+            player2.isMoving &&
+            p1Moved &&
+            p2Moved)
         {
-            player2HP -= 10;
-            Debug.Log("P1攻撃！");
-            Debug.Log("P2 HP : " + player2HP);
-        }
-        else
-        {
+            // 正面衝突 or すれ違い（両者が動いている時だけ）
+            if (p1Dir != Vector2Int.zero &&
+                p2Dir != Vector2Int.zero &&
+                p1Dir == -p2Dir)
+            {
+                Debug.Log("相打ち！（正面衝突 or すれ違い）");
+                player1HP -= 10;
+                player2HP -= 10;
+                battleProcessed = true;
+                return;
+            }
+
+            // 完全同時（方向違いでも相打ち）
+            Debug.Log("相打ち！（完全同時）");
             player1HP -= 10;
-            Debug.Log("P2攻撃！");
-            Debug.Log("P1 HP : " + player1HP);
+            player2HP -= 10;
+            battleProcessed = true;
+            return;
+        }
+
+        // ============================
+        // ② 正面衝突（両者とも移動中のみ）
+        // ============================
+
+        if (player1.isMoving &&
+            player2.isMoving &&
+            p1Dir != Vector2Int.zero &&
+            p2Dir != Vector2Int.zero &&
+            p1Dir == -p2Dir)
+        {
+            Debug.Log("相打ち！（正面衝突）");
+
+            player1HP -= 10;
+            player2HP -= 10;
+
+            battleProcessed = true;
+            return;
+        }
+
+        // ============================
+        // ③ マス交換（すれ違い）
+        // ============================
+        if (player1.startCell == player2.targetCell &&
+            player2.startCell == player1.targetCell)
+        {
+            Debug.Log("相打ち！（マス交換）");
+            player1HP -= 10;
+            player2HP -= 10;
+            battleProcessed = true;
+            return;
+        }
+
+        // ============================
+        // ④ 後入り攻撃（基本ルール）
+        // ============================
+        if (p1Moved && !p2Moved)
+        {
+            Debug.Log("P1攻撃！（後入り）");
+            player2HP -= 10;
+            battleProcessed = true;
+            return;
+        }
+
+        if (!p1Moved && p2Moved)
+        {
+            Debug.Log("P2攻撃！（後入り）");
+            player1HP -= 10;
+            battleProcessed = true;
+            return;
         }
     }
 }

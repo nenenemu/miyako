@@ -36,6 +36,9 @@ public class Playermove : MonoBehaviour
     {
         HandlePlayer(player1);
         HandlePlayer(player2);
+
+        if (BattleManager.Instance != null)
+            BattleManager.Instance.ResolveBattle();
     }
 
     void HandlePlayer(PlayerData p)
@@ -45,29 +48,25 @@ public class Playermove : MonoBehaviour
             p.player.position = Vector3.MoveTowards(
                 p.player.position,
                 p.targetPos,
-                p.moveSpeed * Time.deltaTime);
+                p.moveSpeed * Time.deltaTime
+            );
 
             float total = Vector3.Distance(p.startPos, p.targetPos);
             float now = Vector3.Distance(p.startPos, p.player.position);
-
             float t = total <= 0 ? 1 : now / total;
 
             if (!p.grid.switchedCell && t >= 0.5f)
             {
                 p.grid.currentCell = p.grid.targetCell;
                 p.grid.switchedCell = true;
-
-                if (BattleManager.Instance != null)
-                    BattleManager.Instance.CheckAttack(p.grid);
+                p.grid.switchedFrame = Time.frameCount;
             }
 
             if (Vector3.Distance(p.player.position, p.targetPos) < 0.001f)
             {
                 p.player.position = p.targetPos;
-
                 p.grid.currentCell = p.grid.targetCell;
                 p.grid.isMoving = false;
-
                 p.isMoving = false;
             }
 
@@ -76,14 +75,10 @@ public class Playermove : MonoBehaviour
 
         Vector2Int dir = Vector2Int.zero;
 
-        if (Input.GetKeyDown(p.up))
-            dir = Vector2Int.up;
-        else if (Input.GetKeyDown(p.down))
-            dir = Vector2Int.down;
-        else if (Input.GetKeyDown(p.left))
-            dir = Vector2Int.left;
-        else if (Input.GetKeyDown(p.right))
-            dir = Vector2Int.right;
+        if (Input.GetKeyDown(p.up)) dir = Vector2Int.up;
+        else if (Input.GetKeyDown(p.down)) dir = Vector2Int.down;
+        else if (Input.GetKeyDown(p.left)) dir = Vector2Int.left;
+        else if (Input.GetKeyDown(p.right)) dir = Vector2Int.right;
 
         if (dir == Vector2Int.zero)
             return;
@@ -100,8 +95,8 @@ public class Playermove : MonoBehaviour
             new Vector3(
                 p.grid.targetCell.x,
                 p.grid.targetCell.y,
-                0f)
-            + (Vector3)p.offset;
+                0f
+            ) + (Vector3)p.offset;
 
         p.isMoving = true;
     }
