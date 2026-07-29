@@ -5,6 +5,9 @@ public class Playermove : MonoBehaviour
     [System.Serializable]
     public class PlayerData
     {
+        [HideInInspector] public float nextRepeatTime;
+        [HideInInspector] public Vector2Int holdDirection;
+
         public Transform player;
         public GridUnit grid;
 
@@ -22,6 +25,10 @@ public class Playermove : MonoBehaviour
     }
 
     public Vector2 cellSize = Vector2.one;
+
+    [Header("’·‰Ÿ‚µÝ’è")]
+    public float firstRepeatDelay = 0.2f;   // Å‰‚Ì‘Ò‚¿ŽžŠÔ
+    public float repeatInterval = 0.1f;     // ˜A‘±ˆÚ“®ŠÔŠu
 
     public PlayerData player1;
     public PlayerData player2;
@@ -75,13 +82,52 @@ public class Playermove : MonoBehaviour
 
         Vector2Int dir = Vector2Int.zero;
 
-        if (Input.GetKeyDown(p.up)) dir = Vector2Int.up;
-        else if (Input.GetKeyDown(p.down)) dir = Vector2Int.down;
-        else if (Input.GetKeyDown(p.left)) dir = Vector2Int.left;
-        else if (Input.GetKeyDown(p.right)) dir = Vector2Int.right;
+        // Å‰‚É‰Ÿ‚µ‚½uŠÔ
+        if (Input.GetKeyDown(p.up))
+        {
+            dir = Vector2Int.up;
+            p.holdDirection = dir;
+            p.nextRepeatTime = Time.time + firstRepeatDelay;
+        }
+        else if (Input.GetKeyDown(p.down))
+        {
+            dir = Vector2Int.down;
+            p.holdDirection = dir;
+            p.nextRepeatTime = Time.time + firstRepeatDelay;
+        }
+        else if (Input.GetKeyDown(p.left))
+        {
+            dir = Vector2Int.left;
+            p.holdDirection = dir;
+            p.nextRepeatTime = Time.time + firstRepeatDelay;
+        }
+        else if (Input.GetKeyDown(p.right))
+        {
+            dir = Vector2Int.right;
+            p.holdDirection = dir;
+            p.nextRepeatTime = Time.time + firstRepeatDelay;
+        }
+        // ’·‰Ÿ‚µ
+        else if (Time.time >= p.nextRepeatTime)
+        {
+            if (Input.GetKey(p.up))
+                dir = Vector2Int.up;
+            else if (Input.GetKey(p.down))
+                dir = Vector2Int.down;
+            else if (Input.GetKey(p.left))
+                dir = Vector2Int.left;
+            else if (Input.GetKey(p.right))
+                dir = Vector2Int.right;
+
+            if (dir != Vector2Int.zero)
+            {
+                p.nextRepeatTime = Time.time + repeatInterval;
+            }
+        }
 
         if (dir == Vector2Int.zero)
             return;
+
 
         p.grid.startCell = p.grid.currentCell;
         p.grid.targetCell = p.grid.currentCell + dir;

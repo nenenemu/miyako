@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BattleManager : MonoBehaviour
 {
@@ -10,11 +12,23 @@ public class BattleManager : MonoBehaviour
     public int player1HP = 100;
     public int player2HP = 100;
 
+    [Header("HPÉoÅ[")]
+    public Image player1HPBar;
+    public Image player2HPBar;
+
+    public int maxHP = 100;
+
     bool battleProcessed = false;
 
     void Awake()
     {
         Instance = this;
+    }
+
+    void Update()
+    {
+        player1HPBar.fillAmount = Mathf.Clamp01((float)player1HP / maxHP);
+        player2HPBar.fillAmount = Mathf.Clamp01((float)player2HP / maxHP);
     }
 
     public void ResolveBattle()

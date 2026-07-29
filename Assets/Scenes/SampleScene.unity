@@ -483,7 +483,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.76792455, b: 0.76792455, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -725,10 +725,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoPlayerGridMove
   cellSize: {x: 1, y: 1}
+  firstRepeatDelay: 0.05
+  repeatInterval: 0.02
   player1:
+    nextRepeatTime: 0
+    holdDirection: {x: 0, y: 0}
     player: {fileID: 1345899228}
     grid: {fileID: 1345899229}
-    moveSpeed: 5
+    moveSpeed: 8
     offset: {x: 0.5, y: 0.5}
     up: 119
     down: 115
@@ -738,9 +742,11 @@ MonoBehaviour:
     startPos: {x: 0, y: 0, z: 0}
     targetPos: {x: 0, y: 0, z: 0}
   player2:
+    nextRepeatTime: 0
+    holdDirection: {x: 0, y: 0}
     player: {fileID: 658498844}
     grid: {fileID: 658498845}
-    moveSpeed: 5
+    moveSpeed: 8
     offset: {x: 0.5, y: 0.5}
     up: 273
     down: 274
@@ -765,6 +771,9 @@ MonoBehaviour:
   player2: {fileID: 658498845}
   player1HP: 100
   player2HP: 100
+  player1HPBar: {fileID: 161675417}
+  player2HPBar: {fileID: 1680958604}
+  maxHP: 100
 --- !u!1 &1345899224
 GameObject:
   m_ObjectHideFlags: 0
