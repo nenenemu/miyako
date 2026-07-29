@@ -425,10 +425,6 @@ GameObject:
   m_Component:
   - component: {fileID: 658498844}
   - component: {fileID: 658498843}
-  - component: {fileID: 658498842}
-  - component: {fileID: 658498845}
-  - component: {fileID: 658498847}
-  - component: {fileID: 658498846}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -436,33 +432,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &658498842
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658498840}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!212 &658498843
 SpriteRenderer:
   serializedVersion: 2
@@ -537,70 +506,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &658498845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658498840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6096c4b99fd251945b756ecf54b284da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHP
-  maxHP: 5
-  currentHP: 0
-  hpBar: {fileID: 1680958604}
---- !u!58 &658498846
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658498840}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.45
---- !u!114 &658498847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658498840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f296e9a063f9441b7fb2504e7ca656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerDamageTrigger
-  hp: {fileID: 658498845}
 --- !u!1 &738329631
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,16 +706,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoPlayerGridMove
   cellSize: {x: 1, y: 1}
   player1:
-    damagedThisContact: 0
-    arrivedThisFrame: 0
-    movedThisFrame: 0
-    pushOut: 0
-    previousCell: {x: 0, y: 0}
-    moveDir: {x: 0, y: 0}
-    isInsideSameCell: 0
-    pushDirection: {x: 0, y: 0}
-    sameCellTimer: 0
-    pushing: 0
     player: {fileID: 1345899228}
     moveSpeed: 5
     offset: {x: 0, y: 0}
@@ -820,18 +715,7 @@ MonoBehaviour:
     right: 100
     isMoving: 0
     targetPos: {x: 0, y: 0, z: 0}
-    attacking: 0
   player2:
-    damagedThisContact: 0
-    arrivedThisFrame: 0
-    movedThisFrame: 0
-    pushOut: 0
-    previousCell: {x: 0, y: 0}
-    moveDir: {x: 0, y: 0}
-    isInsideSameCell: 0
-    pushDirection: {x: 0, y: 0}
-    sameCellTimer: 0
-    pushing: 0
     player: {fileID: 658498844}
     moveSpeed: 5
     offset: {x: 0, y: 0}
@@ -841,10 +725,6 @@ MonoBehaviour:
     right: 275
     isMoving: 0
     targetPos: {x: 0, y: 0, z: 0}
-    attacking: 0
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &1345899224
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,10 +735,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1345899228}
   - component: {fileID: 1345899227}
-  - component: {fileID: 1345899226}
-  - component: {fileID: 1345899230}
-  - component: {fileID: 1345899232}
-  - component: {fileID: 1345899231}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player1
@@ -866,33 +742,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &1345899226
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345899224}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!212 &1345899227
 SpriteRenderer:
   serializedVersion: 2
@@ -967,70 +816,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1345899230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345899224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6096c4b99fd251945b756ecf54b284da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHP
-  maxHP: 5
-  currentHP: 0
-  hpBar: {fileID: 161675417}
---- !u!58 &1345899231
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345899224}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.45
---- !u!114 &1345899232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345899224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f296e9a063f9441b7fb2504e7ca656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerDamageTrigger
-  hp: {fileID: 1345899230}
 --- !u!1 &1465351628
 GameObject:
   m_ObjectHideFlags: 0
